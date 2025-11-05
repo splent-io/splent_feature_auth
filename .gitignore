@@ -1,0 +1,16 @@
+venv
+.env
+app.log
+.ruff_cache
+.coverage
+.last_env
+features.txt
+*.egg-info/
+__pycache__
+node_modules
+dist
+build
+flask_sessions/
+flask_session/
+.pytest_cache/
+.vscode
