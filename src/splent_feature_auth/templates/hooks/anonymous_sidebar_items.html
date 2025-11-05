@@ -1,0 +1,16 @@
+<li class="sidebar-header">
+    Let's get started!
+</li>
+
+<li class="sidebar-item {{ 'active' if request.endpoint == 'auth.login' else '' }}">
+    <a class="sidebar-link" href="{{ url_for('auth.login') }}">
+        <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Login</span>
+    </a>
+</li>
+
+<li class="sidebar-item {{ 'active' if request.endpoint == 'auth.show_signup_form' else '' }}">
+    <a class="sidebar-link" href="{{ url_for('auth.show_signup_form') }}">
+        <i class="align-middle" data-feather="user-plus"></i> <span
+            class="align-middle">Sign Up</span>
+    </a>
+</li>
