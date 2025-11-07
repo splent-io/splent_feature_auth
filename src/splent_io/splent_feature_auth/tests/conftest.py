@@ -1,6 +1,6 @@
 from splent_framework.fixtures.fixtures import *
 import pytest
-from splent_feature_auth.models import User
+from splent_io.splent_feature_auth.models import User
 from splent_framework.db import db
 
 

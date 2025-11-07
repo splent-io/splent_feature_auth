@@ -2,7 +2,7 @@ from datetime import datetime
 
 from flask_login import UserMixin
 import pytz
-from splent_feature_profile.models import UserProfile
+from splent_io.splent_feature_profile.models import UserProfile
 from splent_framework.db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 

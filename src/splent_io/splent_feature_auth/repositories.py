@@ -1,4 +1,4 @@
-from splent_feature_auth.models import User
+from splent_io.splent_feature_auth.models import User
 from splent_framework.repositories.BaseRepository import BaseRepository
 
 

@@ -2,11 +2,11 @@ from flask import flash, render_template, redirect, url_for, request
 from flask_login import current_user, logout_user
 from pymysql import IntegrityError
 
-from splent_feature_auth import auth_bp
-from splent_feature_auth.decorators import guest_required
-from splent_feature_auth.forms import SignupForm, LoginForm
-from splent_feature_auth.services import AuthenticationService
-from splent_feature_confirmemail.services import ConfirmemailService
+from splent_io.splent_feature_auth import auth_bp
+from splent_io.splent_feature_auth.decorators import guest_required
+from splent_io.splent_feature_auth.forms import SignupForm, LoginForm
+from splent_io.splent_feature_auth.services import AuthenticationService
+from splent_io.splent_feature_confirmemail.services import ConfirmemailService
 from splent_framework.db import db
 
 

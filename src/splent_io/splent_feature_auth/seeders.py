@@ -1,5 +1,5 @@
-from splent_feature_auth.models import User
-from splent_feature_profile.models import UserProfile
+from splent_io.splent_feature_auth.models import User
+from splent_io.splent_feature_profile.models import UserProfile
 from splent_framework.seeders.BaseSeeder import BaseSeeder
 
 

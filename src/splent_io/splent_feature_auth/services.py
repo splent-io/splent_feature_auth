@@ -3,10 +3,10 @@ import os
 from flask_login import login_user
 from flask_login import current_user
 
-from splent_feature_auth.models import User
-from splent_feature_auth.repositories import UserRepository
-from splent_feature_profile.models import UserProfile
-from splent_feature_profile.repositories import UserProfileRepository
+from splent_io.splent_feature_auth.models import User
+from splent_io.splent_feature_auth.repositories import UserRepository
+from splent_io.splent_feature_profile.models import UserProfile
+from splent_io.splent_feature_profile.repositories import UserProfileRepository
 from splent_framework.configuration.configuration import uploads_folder_name
 from splent_framework.services.BaseService import BaseService
 
