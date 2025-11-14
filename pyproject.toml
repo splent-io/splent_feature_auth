@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "splent_feature_auth"
-version = "1.0.4"
+version = "1.0.5"
 requires-python = ">=3.12"
 authors = [{ name = "DiversoLab", email = "diversolab@us.es" }]
 dependencies = [
