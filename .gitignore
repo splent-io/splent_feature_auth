@@ -1,17 +1,47 @@
-venv
+# Environment variables
 .env
-app.log
-.ruff_cache
-.coverage
-.last_env
-features.txt
-*.egg-info/
-__pycache__
-node_modules
-dist
-build
-flask_sessions/
-flask_session/
-.pytest_cache/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.egg-info
+
+# PyCharm / JetBrains IDE files
+.idea/
+
+# VS Code files
 .vscode
+
+# Log files
+app.log
+app.log.*
+
+# macOS system files
 .DS_Store
+
+# Build artifacts and distribution directories
+build/
+dist/
+
+# Webpack bundles and source maps
+*.bundle.js
+*.bundle.js.map
+*.map
+
+# Coverage reports
+.coverage
+htmlcov/
+
+# pytest cache
+.pytest_cache/
+
+# Virtual environments
+venv/
+.venv/
+
+# Temporary files for testing and deployment
+uploads
+.version
+deployments.log
+
+# Node.js dependencies
+node_modules/
