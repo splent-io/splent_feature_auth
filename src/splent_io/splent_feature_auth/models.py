@@ -2,10 +2,8 @@ from datetime import datetime
 
 from flask_login import UserMixin
 import pytz
-from splent_io.splent_feature_profile.models import UserProfile
 from splent_framework.db import db
 from werkzeug.security import generate_password_hash, check_password_hash
-
 
 
 class User(db.Model, UserMixin):
@@ -16,8 +14,6 @@ class User(db.Model, UserMixin):
     created_at = db.Column(
         db.DateTime, nullable=False, default=lambda: datetime.now(pytz.utc)
     )
-
-    profile = db.relationship(UserProfile, backref="user", uselist=False)
     active = db.Column(db.Boolean, default=True, nullable=False)
 
     def __init__(self, **kwargs):
