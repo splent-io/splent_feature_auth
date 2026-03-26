@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   entry: path.resolve(__dirname, './scripts.js'),
   output: {
-    filename: 'splent_feature_auth.bundle.js',
+    filename: 'auth.bundle.js',
     path: path.resolve(__dirname, '../dist'),
   },
   resolve: {
