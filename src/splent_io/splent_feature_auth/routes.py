@@ -6,12 +6,10 @@ from splent_io.splent_feature_auth import auth_bp
 from splent_io.splent_feature_auth.decorators import guest_required
 from splent_io.splent_feature_auth.forms import SignupForm, LoginForm
 from splent_io.splent_feature_auth.services import AuthenticationService
-from splent_io.splent_feature_confirmemail.services import ConfirmemailService
 from splent_framework.db import db
 
 
 authentication_service = AuthenticationService()
-confirmemail_service = ConfirmemailService()
 
 
 @auth_bp.route("/signup/", methods=["GET", "POST"])
@@ -28,9 +26,7 @@ def show_signup_form():
             return render_template("auth/signup_form.html", form=form)
 
         try:
-            # We try to create the user
-            user = authentication_service.create_with_profile(**form.data)
-            confirmemail_service.send_confirmation_email(user.email)
+            user = authentication_service.create_user(**form.data)
         except IntegrityError as exc:
             db.session.rollback()
             if "Duplicate entry" in str(exc):

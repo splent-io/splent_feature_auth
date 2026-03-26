@@ -1,22 +1,23 @@
 import os
 
-from flask_login import login_user
-from flask_login import current_user
+from blinker import Namespace
+from flask_login import login_user, current_user
 
 from splent_io.splent_feature_auth.models import User
 from splent_io.splent_feature_auth.repositories import UserRepository
-from splent_io.splent_feature_profile.models import UserProfile
-from splent_io.splent_feature_profile.repositories import UserProfileRepository
 from splent_framework.configuration.configuration import uploads_folder_name
 from splent_framework.services.BaseService import BaseService
 
 
+# Signals — features that depend on auth can connect to these
+auth_signals = Namespace()
+user_registered = auth_signals.signal("user-registered")
+
+
 class AuthenticationService(BaseService):
 
-    def __init__(self, user_repository=None, user_profile_repository=None):
+    def __init__(self, user_repository=None):
         super().__init__(user_repository or UserRepository())
-        self.user_profile_repository = user_profile_repository or UserProfileRepository()
-
 
     def login(self, email, password, remember=True):
         user = self.repository.get_by_email(email)
@@ -28,57 +29,36 @@ class AuthenticationService(BaseService):
     def is_email_available(self, email: str) -> bool:
         return self.repository.get_by_email(email) is None
 
-    def create_with_profile(self, **kwargs):
+    def create_user(self, **kwargs):
+        """Create a User only. Emits user_registered signal for dependent features."""
         try:
             email = kwargs.pop("email", None)
             password = kwargs.pop("password", None)
-            name = kwargs.pop("name", None)
-            surname = kwargs.pop("surname", None)
 
             if not email:
                 raise ValueError("Email is required.")
             if not password:
                 raise ValueError("Password is required.")
-            if not name:
-                raise ValueError("Name is required.")
-            if not surname:
-                raise ValueError("Surname is required.")
 
             user_data = {
                 "email": email,
                 "password": password,
                 "active": False,
             }
+            user = self.create(**user_data)
 
-            profile_data = {
-                "name": name,
-                "surname": surname,
-            }
+            # Emit signal — profile, confirmemail, etc. can react
+            from flask import current_app
+            user_registered.send(current_app._get_current_object(), user=user, **kwargs)
 
-            user = self.create(commit=False, **user_data)
-            profile_data["user_id"] = user.id
-            self.user_profile_repository.create(**profile_data)
-            self.repository.session.commit()
+            return user
         except Exception as exc:
             self.repository.session.rollback()
             raise exc
-        return user
-
-    def update_profile(self, user_profile_id, form):
-        if form.validate():
-            updated_instance = self.update(user_profile_id, **form.data)
-            return updated_instance, None
-
-        return None, form.errors
 
     def get_authenticated_user(self) -> User | None:
         if current_user.is_authenticated:
             return current_user
-        return None
-
-    def get_authenticated_user_profile(self) -> UserProfile | None:
-        if current_user.is_authenticated:
-            return current_user.profile
         return None
 
     def temp_folder_by_user(self, user: User) -> str:
