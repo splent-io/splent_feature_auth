@@ -1,6 +1,7 @@
 from unittest.mock import MagicMock, patch
 from splent_io.splent_feature_auth.services import AuthenticationService
 
+
 @patch("splent_io.splent_feature_auth.services.login_user")
 def test_authenticate_valid_user(mock_login_user):
     mock_user = MagicMock()

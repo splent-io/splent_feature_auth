@@ -1,4 +1,4 @@
-from splent_framework.fixtures.fixtures import *
+from splent_framework.fixtures.fixtures import *  # noqa: F401,F403
 import pytest
 from splent_io.splent_feature_auth.models import User
 from splent_framework.db import db
@@ -13,13 +13,16 @@ def auth_test_user(test_app):
         db.session.commit()
         return user
 
+
 @pytest.fixture(scope="function")
 def logged_in_client(test_client, auth_test_user):
-    test_client.post("/login", data={
-        "email": "user1@example.com",
-        "password": "1234"
-    }, follow_redirects=True)
+    test_client.post(
+        "/login",
+        data={"email": "user1@example.com", "password": "1234"},
+        follow_redirects=True,
+    )
     return test_client
+
 
 @pytest.fixture(scope="function")
 def inactive_user(test_app):

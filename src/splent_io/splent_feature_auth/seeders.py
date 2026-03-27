@@ -3,7 +3,6 @@ from splent_framework.seeders.BaseSeeder import BaseSeeder
 
 
 class AuthSeeder(BaseSeeder):
-
     priority = 1
 
     def run(self):

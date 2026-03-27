@@ -14,10 +14,13 @@ def auth_test_client(test_client):
 
     yield test_client
 
+
 def test_login_success(auth_test_client, auth_test_user):
-    response = auth_test_client.post("/login", data=dict(
-        email="user1@example.com", password="1234"
-    ), follow_redirects=True)
+    response = auth_test_client.post(
+        "/login",
+        data=dict(email="user1@example.com", password="1234"),
+        follow_redirects=True,
+    )
 
     assert b"Invalid credentials" not in response.data
 

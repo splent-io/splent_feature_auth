@@ -33,4 +33,5 @@ class User(db.Model, UserMixin):
     def temp_folder(self) -> str:
         import os
         from splent_framework.configuration.configuration import uploads_folder_name
+
         return os.path.join(uploads_folder_name(), "temp", str(self.id))

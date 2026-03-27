@@ -19,14 +19,13 @@ def show_signup_form():
 
     form = SignupForm()
     if form.validate_on_submit():
-
         email = form.email.data
         if not authentication_service.is_email_available(email):
             flash(f"Email {email} is already in use", "danger")
             return render_template("auth/signup_form.html", form=form)
 
         try:
-            user = authentication_service.create_user(**form.data)
+            authentication_service.create_user(**form.data)
         except IntegrityError as exc:
             db.session.rollback()
             if "Duplicate entry" in str(exc):
@@ -48,7 +47,6 @@ def login():
 
     form = LoginForm()
     if request.method == "POST" and form.validate_on_submit():
-
         if authentication_service.login(form.email.data, form.password.data):
             return redirect(url_for("public.index"))
 

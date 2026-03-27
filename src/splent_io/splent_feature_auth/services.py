@@ -15,7 +15,6 @@ user_registered = auth_signals.signal("user-registered")
 
 
 class AuthenticationService(BaseService):
-
     def __init__(self, user_repository=None):
         super().__init__(user_repository or UserRepository())
 
@@ -49,6 +48,7 @@ class AuthenticationService(BaseService):
 
             # Emit signal — profile, confirmemail, etc. can react
             from flask import current_app
+
             user_registered.send(current_app._get_current_object(), user=user, **kwargs)
 
             return user
