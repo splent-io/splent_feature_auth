@@ -1,5 +1,5 @@
 from splent_framework.hooks.template_hooks import register_template_hook
-from flask import render_template
+from flask import render_template, url_for
 
 
 # ── Sidebar hooks ─────────────────────────────────────────────────────────────
@@ -28,3 +28,12 @@ def navbar_authenticated():
 
 register_template_hook("layout.navbar.anonymous", navbar_anonymous)
 register_template_hook("layout.navbar.authenticated", navbar_authenticated)
+
+
+# ── Script hooks ─────────────────────────────────────────────────────────────
+
+def auth_scripts():
+    return '<script src="' + url_for('auth.assets', subfolder='dist', filename='auth.bundle.js') + '"></script>'
+
+
+register_template_hook("layout.scripts", auth_scripts)
