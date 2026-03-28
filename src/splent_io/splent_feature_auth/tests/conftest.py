@@ -11,6 +11,8 @@ def auth_test_user(test_app):
         user.set_password("1234")
         db.session.add(user)
         db.session.commit()
+        # Expunge so the object is usable outside the session context
+        db.session.expunge(user)
         return user
 
 
