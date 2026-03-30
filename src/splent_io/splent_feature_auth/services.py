@@ -1,17 +1,12 @@
 import os
 
-from blinker import Namespace
 from flask_login import login_user, current_user
 
 from splent_io.splent_feature_auth.models import User
 from splent_io.splent_feature_auth.repositories import UserRepository
+from splent_io.splent_feature_auth.signals import user_registered
 from splent_framework.configuration.configuration import uploads_folder_name
 from splent_framework.services.BaseService import BaseService
-
-
-# Signals — features that depend on auth can connect to these
-auth_signals = Namespace()
-user_registered = auth_signals.signal("user-registered")
 
 
 class AuthenticationService(BaseService):

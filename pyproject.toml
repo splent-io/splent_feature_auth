@@ -43,6 +43,7 @@ models     = ["User"]
 commands   = []
 hooks      = ["layout.anonymous_sidebar", "layout.authenticated_sidebar", "layout.navbar.anonymous", "layout.navbar.authenticated", "layout.scripts"]
 services   = ["AuthenticationService"]
+signals    = ["user-registered"]
 docker     = []
 
 [tool.splent.contract.requires]
