@@ -1,4 +1,5 @@
 from flask import flash, render_template, redirect, url_for, request
+from flask_babel import gettext as _
 from flask_login import current_user, logout_user
 from pymysql import IntegrityError
 
@@ -21,7 +22,7 @@ def show_signup_form():
     if form.validate_on_submit():
         email = form.email.data
         if not authentication_service.is_email_available(email):
-            flash(f"Email {email} is already in use", "danger")
+            flash(_("Email %(email)s is already in use", email=email), "danger")
             return render_template("auth/signup_form.html", form=form)
 
         try:
@@ -29,9 +30,9 @@ def show_signup_form():
         except IntegrityError as exc:
             db.session.rollback()
             if "Duplicate entry" in str(exc):
-                flash(f"Email {email} is already in use", "danger")
+                flash(_("Email %(email)s is already in use", email=email), "danger")
             else:
-                flash(f"Error creating user: {exc}", "danger")
+                flash(_("Error creating user"), "danger")
             return render_template("auth/signup_form.html", form=form)
 
         return redirect(url_for("public.index"))
@@ -51,7 +52,7 @@ def login():
             return redirect(url_for("public.index"))
 
         return render_template(
-            "auth/login_form.html", form=form, error="Invalid credentials"
+            "auth/login_form.html", form=form, error=_("Invalid credentials")
         )
 
     return render_template("auth/login_form.html", form=form)
