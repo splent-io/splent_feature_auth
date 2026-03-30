@@ -19,8 +19,13 @@ app.log.*
 .DS_Store
 
 # Build artifacts and distribution directories
-/build/
-/dist/
+build/
+dist/
+
+# Webpack bundles and source maps
+*.bundle.js
+*.bundle.js.map
+*.map
 
 # Compiled translations
 *.mo
