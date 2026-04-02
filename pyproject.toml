@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "splent_feature_auth"
-version = "1.5.5"
+version = "1.5.6"
 requires-python = ">=3.13"
 authors = [{ name = "DiversoLab", email = "diversolab@us.es" }]
 dependencies = [
@@ -26,7 +26,7 @@ description = "Authentication feature: registration, login, logout, and session 
 
 [tool.splent.contract.provides]
 routes     = ["/login", "/logout", "/signup/"]
-blueprints = ["auth_bp"]
+blueprints = []
 models     = ["User"]
 commands   = []
 hooks      = ["layout.anonymous_sidebar", "layout.authenticated_sidebar", "layout.navbar.anonymous", "layout.navbar.authenticated", "layout.scripts"]
@@ -42,7 +42,7 @@ signals  = []
 
 [tool.splent.contract.extensible]
 services  = ["AuthenticationService"]
-templates = ["auth/login_form.html", "auth/signup_form.html"]
+templates = ["auth/login_form.html", "auth/signup_form.html", "hooks/anonymous_sidebar_items.html", "hooks/authenticated_sidebar_items.html", "hooks/navbar_anonymous.html", "hooks/navbar_authenticated.html"]
 models    = ["User"]
-hooks     = ["layout.anonymous_sidebar", "layout.authenticated_sidebar", "layout.navbar.anonymous", "layout.navbar.authenticated"]
-routes    = true
+hooks     = ["auth.login.form_footer", "auth.signup.form_footer", "layout.anonymous_sidebar", "layout.authenticated_sidebar", "layout.navbar.anonymous", "layout.navbar.authenticated", "layout.scripts"]
+routes    = false

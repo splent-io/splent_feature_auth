@@ -1,11 +1,16 @@
-from splent_framework.blueprints.base_blueprint import BaseBlueprint
+from splent_framework.blueprints.base_blueprint import create_blueprint
+from splent_framework.services.service_locator import register_service
 from flask_login import LoginManager
 
-auth_bp = BaseBlueprint("auth", __name__, template_folder="templates")
+from splent_io.splent_feature_auth.services import AuthenticationService
+
+auth_bp = create_blueprint(__name__)
 
 
 def init_feature(app):
     from .models import User
+
+    register_service(app, "AuthenticationService", AuthenticationService)
 
     login_manager = LoginManager()
     login_manager.init_app(app)
