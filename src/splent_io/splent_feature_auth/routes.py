@@ -1,43 +1,14 @@
-from flask import flash, render_template, redirect, url_for, request
+from flask import render_template, redirect, url_for, request
 from flask_babel import gettext as _
 from flask_login import current_user, logout_user
-from pymysql import IntegrityError
 
 from splent_io.splent_feature_auth import auth_bp
 from splent_io.splent_feature_auth.decorators import guest_required
-from splent_io.splent_feature_auth.forms import SignupForm, LoginForm
+from splent_io.splent_feature_auth.forms import LoginForm
 from splent_io.splent_feature_auth.services import AuthenticationService
-from splent_framework.db import db
 
 
 authentication_service = AuthenticationService()
-
-
-@auth_bp.route("/signup/", methods=["GET", "POST"])
-def show_signup_form():
-    if current_user.is_authenticated:
-        return redirect(url_for("public.index"))
-
-    form = SignupForm()
-    if form.validate_on_submit():
-        email = form.email.data
-        if not authentication_service.is_email_available(email):
-            flash(_("Email %(email)s is already in use", email=email), "danger")
-            return render_template("auth/signup_form.html", form=form)
-
-        try:
-            authentication_service.create_user(**form.data)
-        except IntegrityError as exc:
-            db.session.rollback()
-            if "Duplicate entry" in str(exc):
-                flash(_("Email %(email)s is already in use", email=email), "danger")
-            else:
-                flash(_("Error creating user"), "danger")
-            return render_template("auth/signup_form.html", form=form)
-
-        return redirect(url_for("public.index"))
-
-    return render_template("auth/signup_form.html", form=form)
 
 
 @auth_bp.route("/login", methods=["GET", "POST"])
