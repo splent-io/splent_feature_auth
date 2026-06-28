@@ -44,7 +44,11 @@ def list_users():
         return
     click.echo()
     for u in users:
-        state = click.style("active", fg="green") if u.active else click.style("inactive", fg="red")
+        state = (
+            click.style("active", fg="green")
+            if u.active
+            else click.style("inactive", fg="red")
+        )
         click.echo(f"  #{u.id:<4} {u.email or '(no email)':<32} [{state}]")
     click.echo()
 
