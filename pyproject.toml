@@ -24,7 +24,7 @@ exclude = ["*.tests", "*.tests.*"]
 # Preserved across refreshes: description, category, tags, env, and
 # requires.features_manual (dependencies invisible to static analysis).
 [tool.splent.contract]
-description = "Authentication feature: registration, login, logout, and session management"
+description = "Authentication with registration, login, logout and session management"
 archetype = "full"
 
 [tool.splent.contract.provides]
