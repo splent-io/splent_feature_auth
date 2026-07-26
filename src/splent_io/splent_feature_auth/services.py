@@ -21,7 +21,7 @@ class AuthenticationService(BaseService):
         return False
 
     def is_email_available(self, email: str) -> bool:
-        return self.repository.get_by_email(email) is None
+        return not self.repository.email_exists(email)
 
     def create_user(self, **kwargs):
         """Create a User only. Emits user_registered signal for dependent features."""
