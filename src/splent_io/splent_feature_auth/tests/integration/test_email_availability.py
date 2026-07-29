@@ -23,7 +23,9 @@ def test_inactive_address_is_not_available(test_app):
     """The regression: a freshly registered account is inactive."""
     with test_app.app_context():
         _make_user("pending@example.com", active=False)
-        assert AuthenticationService().is_email_available("pending@example.com") is False
+        assert (
+            AuthenticationService().is_email_available("pending@example.com") is False
+        )
 
 
 def test_active_address_is_not_available(test_app):
