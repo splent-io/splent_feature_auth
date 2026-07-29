@@ -49,7 +49,7 @@ def list_users():
             if u.active
             else click.style("inactive", fg="red")
         )
-        click.echo(f"  #{u.id:<4} {u.email or '(no email)':<32} [{state}]")
+        click.echo(f"  #{u.id:<4} {u.email or '(no email)':<32} {u.role:<10} [{state}]")
     click.echo()
 
 
@@ -62,14 +62,41 @@ def list_users():
     confirmation_prompt=True,
     help="Password for the new user.",
 )
-def create_user(email, password):
+@click.option(
+    "--role",
+    default="user",
+    show_default=True,
+    help="Role consumed by role_required() gates (for example admin or staff).",
+)
+def create_user(email, password, role):
     """Create a new user."""
     if User.query.filter_by(email=email).first():
         raise click.ClickException(f"A user with email '{email}' already exists.")
-    user = User(email=email, password=password)
+    user = User(email=email, password=password, role=role)
     db.session.add(user)
     db.session.commit()
-    click.secho(f"  Created user {email}.", fg="green")
+    click.secho(f"  Created user {email} with role {role}.", fg="green")
 
 
-cli_commands = [set_password, list_users, create_user]
+@click.command("set-role")
+@click.argument("email")
+@click.argument("role")
+def set_role(email, role):
+    """Change ANY user's role, by email.
+
+    The counterpart of the role backfill: after upgrading, demote the
+    accounts that should not keep administrative access and promote the
+    real staff.
+    """
+    user = User.query.filter_by(email=email).first()
+    if user is None:
+        raise click.ClickException(f"No user with email '{email}'.")
+    role = (role or "").strip()
+    if not role:
+        raise click.ClickException("Role cannot be empty.")
+    previous, user.role = user.role, role
+    db.session.commit()
+    click.secho(f"  {email}: role {previous} -> {role}.", fg="green")
+
+
+cli_commands = [set_password, list_users, create_user, set_role]

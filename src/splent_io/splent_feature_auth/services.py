@@ -38,6 +38,9 @@ class AuthenticationService(BaseService):
                 "email": email,
                 "password": password,
                 "active": False,
+                # Least privilege unless the caller says otherwise; public
+                # signup and SSO flows must never mint privileged accounts.
+                "role": kwargs.pop("role", None) or "user",
             }
             user = self.create(**user_data)
 

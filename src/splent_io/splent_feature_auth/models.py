@@ -15,6 +15,12 @@ class User(db.Model, UserMixin):
         db.DateTime, nullable=False, default=lambda: datetime.now(pytz.utc)
     )
     active = db.Column(db.Boolean, default=True, nullable=False)
+    # Shared authorization vocabulary consumed by role_required(). Least
+    # privilege by default; the migration backfills pre-existing rows to
+    # "admin" so products keep their current behaviour.
+    role = db.Column(
+        db.String(32), default="user", server_default="user", nullable=False
+    )
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -23,6 +29,9 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return f"<User {self.email}>"
+
+    def has_role(self, *roles) -> bool:
+        return self.role in roles
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
