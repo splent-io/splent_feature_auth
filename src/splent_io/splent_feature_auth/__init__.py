@@ -18,7 +18,12 @@ def init_feature(app):
 
     @login_manager.user_loader
     def load_user(user_id):
-        return User.query.get(int(user_id))
+        # Login already refuses disabled accounts (UserRepository.get_by_email
+        # filters on active). Refusing them here too means deactivating an
+        # account ends its live sessions and remember-me cookies instead of
+        # letting them run until expiry.
+        user = User.query.get(int(user_id))
+        return user if user is not None and user.active else None
 
     app.login_manager = login_manager
 

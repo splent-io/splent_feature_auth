@@ -2,7 +2,10 @@ from functools import wraps
 
 from flask import abort
 from flask_login import current_user, login_required  # noqa: F401
-from splent_framework.decorators.decorators import pass_or_abort
+from splent_framework.decorators.decorators import (  # noqa: F401
+    pass_or_abort,
+    role_required,
+)
 
 
 def guest_required(f):
