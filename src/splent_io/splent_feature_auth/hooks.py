@@ -51,7 +51,10 @@ def public_nav_account():
     return render_template("hooks/public_nav.html")
 
 
-register_template_hook("layout.nav", public_nav_account)
+# layout.nav.end, not layout.nav: the far right of the bar, past the
+# language switcher. Signing in is the reader's own control rather than a
+# part of the site's navigation, and that is where a reader looks for it.
+register_template_hook("layout.nav.end", public_nav_account)
 
 
 # ── Script hooks ─────────────────────────────────────────────────────────────
