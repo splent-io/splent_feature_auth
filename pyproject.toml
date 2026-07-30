@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "splent_feature_auth"
-version = "1.7.0"
+version = "1.7.1"
 requires-python = ">=3.13"
 authors = [{ name = "DiversoLab", email = "diversolab@us.es" }]
 dependencies = [
@@ -24,8 +24,10 @@ exclude = ["*.tests", "*.tests.*"]
 
 # ── Feature Contract (auto-generated) ────────────────────────────────────────
 # Do not edit manually — re-run `splent feature:contract --write` to refresh.
-# Preserved across refreshes: description, category, tags, env, and
-# requires.features_manual (dependencies invisible to static analysis).
+# Preserved across refreshes: description, category, tags, env,
+# requires.features_manual (dependencies invisible to static analysis)
+# and provides.routes_manual (routes built from configuration at
+# registration time, which have no literal path to find in source).
 [tool.splent.contract]
 description = "Authentication with registration, login, logout and session management"
 archetype = "full"
