@@ -1,5 +1,5 @@
 from splent_framework.hooks.template_hooks import register_template_hook
-from flask import render_template, url_for
+from flask import current_app, render_template, url_for
 
 
 # ── Sidebar hooks ─────────────────────────────────────────────────────────────
@@ -30,6 +30,28 @@ def navbar_authenticated():
 
 register_template_hook("layout.navbar.anonymous", navbar_anonymous)
 register_template_hook("layout.navbar.authenticated", navbar_authenticated)
+
+
+# ── Public navigation ────────────────────────────────────────────────────────
+
+
+def public_nav_account():
+    """The way in, in the public header.
+
+    The navbar hooks above belong to the admin shell, so a product whose
+    front end is the theme's public shell had no visible way to sign in at
+    all: you had to know the URL. This is a hook rather than a nav registry
+    entry because the entry differs per request, which a static declaration
+    cannot express.
+
+    A product with no members area can turn it off with AUTH_NAV_LOGIN=false.
+    """
+    if not current_app.config.get("AUTH_NAV_LOGIN", True):
+        return ""
+    return render_template("hooks/public_nav.html")
+
+
+register_template_hook("layout.nav", public_nav_account)
 
 
 # ── Script hooks ─────────────────────────────────────────────────────────────

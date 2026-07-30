@@ -1,0 +1,11 @@
+{# Log in, or the way out, in the public header.
+
+   Only these two. Registration is a separate feature by design: a product
+   is closed unless it installs splent_feature_signup, and a wiki whose
+   accounts are created by its staff must never offer a way in from here.
+#}
+{% if current_user.is_authenticated %}
+<a class="site-nav__account" href="{{ url_for('auth.logout') }}">{{ _('Log out') }}</a>
+{% else %}
+<a class="site-nav__account" href="{{ url_for('auth.login') }}">{{ _('Log in') }}</a>
+{% endif %}
