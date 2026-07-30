@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-30 14:31+0000\n"
+"POT-Creation-Date: 2026-07-30 15:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,17 +17,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: src/splent_io/splent_feature_auth/routes.py:25
-#: src/splent_io/splent_feature_auth/routes.py:33
-#, python-format
-msgid "Email %(email)s is already in use"
-msgstr ""
-
-#: src/splent_io/splent_feature_auth/routes.py:35
-msgid "Error creating user"
-msgstr ""
-
-#: src/splent_io/splent_feature_auth/routes.py:55
+#: src/splent_io/splent_feature_auth/routes.py:43
 msgid "Invalid credentials"
+msgstr ""
+
+#: src/splent_io/splent_feature_auth/templates/hooks/public_nav.html:8
+msgid "Log out"
+msgstr ""
+
+#: src/splent_io/splent_feature_auth/templates/hooks/public_nav.html:10
+msgid "Log in"
 msgstr ""
 
