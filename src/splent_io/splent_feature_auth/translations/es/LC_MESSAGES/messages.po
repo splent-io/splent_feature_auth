@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-07-30 15:43+0000\n"
+"POT-Creation-Date: 2026-07-31 00:18+0000\n"
 "PO-Revision-Date: 2026-03-30 14:31+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -18,17 +18,40 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
+#: src/splent_io/splent_feature_auth/forms.py:12
+msgid "Email"
+msgstr "Correo"
+
+#: src/splent_io/splent_feature_auth/forms.py:13
+msgid "Password"
+msgstr "Contraseña"
+
+#: src/splent_io/splent_feature_auth/forms.py:14
+msgid "Remember me"
+msgstr "No cerrar la sesión"
+
+#: src/splent_io/splent_feature_auth/forms.py:15
+#: src/splent_io/splent_feature_auth/templates/auth/login_form.html:13
+#: src/splent_io/splent_feature_auth/templates/auth/login_form.html:17
+#: src/splent_io/splent_feature_auth/templates/hooks/public_nav.html:10
+msgid "Log in"
+msgstr "Entrar"
+
 #: src/splent_io/splent_feature_auth/routes.py:43
 msgid "Invalid credentials"
 msgstr "Credenciales incorrectas"
 
+#: src/splent_io/splent_feature_auth/templates/auth/login_form.html:40
+msgid "Your email address"
+msgstr "Tu dirección de correo"
+
+#: src/splent_io/splent_feature_auth/templates/auth/login_form.html:55
+msgid "Your password"
+msgstr "Tu contraseña"
+
 #: src/splent_io/splent_feature_auth/templates/hooks/public_nav.html:8
 msgid "Log out"
 msgstr "Salir"
-
-#: src/splent_io/splent_feature_auth/templates/hooks/public_nav.html:10
-msgid "Log in"
-msgstr "Entrar"
 
 #~ msgid "Email %(email)s is already in use"
 #~ msgstr "El email %(email)s ya esta en uso"
