@@ -54,3 +54,14 @@ templates = ["auth/login_form.html", "hooks/anonymous_sidebar_items.html", "hook
 models    = ["User"]
 hooks     = ["auth.login.form_footer", "layout.anonymous_sidebar", "layout.authenticated_sidebar", "layout.nav.end", "layout.navbar.anonymous", "layout.navbar.authenticated", "layout.scripts"]
 routes    = false
+
+# ── Configuration ─────────────────────────────────────────────────────────
+[tool.splent.config]
+# "Log in" in the public header. A site where staff reach the panel by
+# typing the URL turns it off.
+AUTH_NAV_LOGIN = true
+# The shell the sign-in page renders in. Empty means the admin shell,
+# which is what a product that is only a back office has. A product with a
+# public shell names it, so its front door does not look like a different
+# site.
+AUTH_LOGIN_LAYOUT = ""
