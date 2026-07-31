@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "splent_feature_auth"
-version = "1.9.0"
+version = "1.10.0"
 requires-python = ">=3.13"
 authors = [{ name = "DiversoLab", email = "diversolab@us.es" }]
 dependencies = [
@@ -45,7 +45,7 @@ docker     = []
 
 [tool.splent.contract.requires]
 features = []
-env_vars = ["AUTH_MIGRATION_LEGACY_ROLE", "AUTH_NAV_LOGIN"]
+env_vars = ["AUTH_LOGIN_LAYOUT", "AUTH_MIGRATION_LEGACY_ROLE", "AUTH_NAV_LOGIN"]
 signals  = []
 
 [tool.splent.contract.extensible]
